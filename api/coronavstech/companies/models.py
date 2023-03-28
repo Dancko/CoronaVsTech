@@ -16,5 +16,5 @@ class Company(models.Model):
     link = models.URLField(max_length=100, blank=True)
     note = models.CharField(max_length=150, blank=True)
 
-    def __str__(self):
-        return str(self.name)
+    def __str__(self) -> str:
+        return f'{self.name}'
