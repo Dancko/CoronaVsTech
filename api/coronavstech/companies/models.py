@@ -17,4 +17,4 @@ class Company(models.Model):
     note = models.CharField(max_length=150, blank=True)
 
     def __str__(self) -> str:
-        return f'{self.name}'
+        return f"{self.name}"
