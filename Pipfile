@@ -14,5 +14,3 @@ pytest-django = "*"
 [requires]
 python_version = "3.10.9"
 
-[scripts]
-test = "pytest"

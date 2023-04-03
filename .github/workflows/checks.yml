@@ -17,5 +17,4 @@ jobs:
  # Install all dependencies, including development ones
 
       - name: Run test suite
-        run: |
-          pipenv run test -v
+        run: pytest -v -s durations=0
