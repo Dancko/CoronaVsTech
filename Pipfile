@@ -12,5 +12,5 @@ pytest-django = "*"
 [dev-packages]
 
 [requires]
-python_version = "3.10.9"
+python_version = "3.10.10"
 
