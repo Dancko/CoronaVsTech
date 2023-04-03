@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Installing pip
         run: pip install pipenv --upgrade
+      - name: Stopping venv
+        run: pipenv --rm
       - name: Installing dependencies
         run: pipenv install --system
       - name: Test
