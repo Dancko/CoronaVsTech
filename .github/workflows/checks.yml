@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DJANGO_SETTINGS_MODULE: coronavstech.settings
+      PYTHONPATH: /home/runner/testing/testing/api/coronavstech
 
     steps:
       - uses: actions/checkout@v1
