@@ -8,11 +8,11 @@ jobs:
     name: Test
     runs-on: ubuntu-20.04
     steps:
-      - name: Installing pip
-        run: pip install pipenv --upgrade
-      - name: Stopping venv
-        run: pipenv --rm
-      - name: Installing dependencies
-        run: pipenv install --system
+      - uses: actions/checkout@v2 # Checking out the repo
+
+      - name: Install dependencies
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: install -d
       - name: Test
         run: pytest api/coronavstech -s -v --durations=0
