@@ -1,6 +1,5 @@
-from django.test import Client
-from unittest import TestCase
 import pytest
+import logging
 from django.shortcuts import reverse
 from rest_framework import status
 
@@ -8,18 +7,10 @@ from companies.models import Company
 
 
 company_list_url = reverse("companies-list")
+pytestmark = pytest.mark.django_db
 
 
-@pytest.mark.django_db
-class BasicCompanyAPITestCase(TestCase):
-    """Base class for all the TestCases."""
-
-    def setUp(self) -> None:
-        self.client = Client()
-        self.company_list_url = reverse("companies-list")
-
-
-@pytest.mark.django_db
+# ________________GET Company tests________________
 def test_zero_companies_should_return_empty_list(client) -> None:
     """Test companies list view returns empty json when no companies are added."""
     res = client.get(company_list_url)
@@ -28,7 +19,6 @@ def test_zero_companies_should_return_empty_list(client) -> None:
     assert res.data == []
 
 
-@pytest.mark.django_db
 def test_one_company_exists_should_succeed(client) -> None:
     """Test returning one company if it exists in db."""
     amazon = Company.objects.create(name="Amazon")
@@ -43,7 +33,7 @@ def test_one_company_exists_should_succeed(client) -> None:
     amazon.delete()
 
 
-@pytest.mark.django_db
+# ____________POST Company tests_________________
 def test_create_company_with_empty_payload_should_fail(client) -> None:
     """Test creating a company with no name will raise an error."""
     res = client.post(company_list_url)
@@ -52,7 +42,6 @@ def test_create_company_with_empty_payload_should_fail(client) -> None:
     assert res.data == {"name": ["This field is required."]}
 
 
-@pytest.mark.django_db
 def test_create_existing_company_should_fail(client) -> None:
     """Test creating a company which already exists will raise an error."""
     Company.objects.create(name="Amazon")
@@ -63,7 +52,6 @@ def test_create_existing_company_should_fail(client) -> None:
     assert res.data == {"name": ["company with this name already exists."]}
 
 
-@pytest.mark.django_db
 def test_create_company_with_only_name_success(client) -> None:
     """Test creating a company providing only its name succeed."""
     payload = {"name": "Amazon"}
@@ -76,7 +64,6 @@ def test_create_company_with_only_name_success(client) -> None:
     assert res.data["note"] == ""
 
 
-@pytest.mark.django_db
 def test_create_company_with_layoffs_status_should_succeed(client) -> None:
     """Test creating company with layoffs status should succeed."""
     payload = {"name": "Amazon", "company_status": "Layoffs"}
@@ -89,7 +76,6 @@ def test_create_company_with_layoffs_status_should_succeed(client) -> None:
     assert res.data["note"] == ""
 
 
-@pytest.mark.django_db
 def test_create_company_with_wrong_status_should_fail(client) -> None:
     """Test creating company with the wrong status will raise an error."""
     payload = {"name": "Amazon", "company_status": "Layoff"}
@@ -114,9 +100,6 @@ def test_raise_covid_exception_should_succeed() -> None:
 @pytest.mark.xfail
 def test_xfail() -> None:
     assert 1 == 2
-
-
-import logging
 
 
 logger = logging.getLogger("CORONA_LOGS")
