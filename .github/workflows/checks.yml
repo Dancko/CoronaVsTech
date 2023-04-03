@@ -17,5 +17,6 @@ jobs:
       - name: Run tests
         run: |
           pipenv install --system
+          echo "PYTHONPATH=home/runner/work/testing/api/coronavstech" >> $GITHUB_ENV
           export DJANGO_SETTINGS_MODULE="coronavstech.settings"
           pipenv run pytest
