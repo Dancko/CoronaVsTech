@@ -1,6 +1,5 @@
 ---
 name: checks
-image: python:3.10.9
 
 on: [push]
 
