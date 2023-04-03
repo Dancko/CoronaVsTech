@@ -9,7 +9,9 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Installing pip
-        run: pip install pipenv --upgrade pipenv install --system
+        run: pip install pipenv --upgrade
+      - name: Installing dependencies
+        run: pipenv install --system
       - name: Test
         run: pytest api/coronavstech -s -v --durations=0
       - name: Lint
