@@ -9,7 +9,10 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2 # Checking out the repo
-
+      - name: pythonpath
+        run: export PYTHONPATH=$PYTHONPATH:$PYTHONPATH/api/coronavstech
+      - name: exporting django settings
+        run: export DJANGO_SETTINGS_MODULE="coronavstech.settings"
       - name: Install dependencies
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
