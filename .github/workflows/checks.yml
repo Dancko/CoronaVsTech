@@ -17,4 +17,5 @@ jobs:
       - name: Run tests
         run: |
           pipenv install --system
+          export DJANGO_SETTINGS_MODULE="coronavstech.settings"
           pipenv run pytest
