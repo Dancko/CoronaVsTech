@@ -5,9 +5,6 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      DJANGO_SETTINGS_MODULE: coronavstech.settings
-      PYTHONPATH: /home/runner/testing/testing/api/coronavstech
 
     steps:
       - uses: actions/checkout@v1
@@ -20,4 +17,5 @@ jobs:
       - name: Run tests
         run: |
           pipenv install --system
+          PYTHONPATH="/home/runner/testing/testing/api/coronavstech"
           pytest -v -s
