@@ -18,6 +18,6 @@ jobs:
         run: |
           pipenv install --system
           pwd
-          export PYTHONPATH=/home/runner/testing/testing/api/coronavstech
+          export PYTHONPATH=/home/runner/work/testing/testing/api/coronavstech
           export DJANGO_SETTINGS_MODULE=coronavstech.settings
           pytest -v -s
