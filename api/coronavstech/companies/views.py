@@ -4,8 +4,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.request import Request
 from django.core.mail import send_mail
-from .serializers import CompanySerializer
-from .models import Company
+from companies.serializers import CompanySerializer
+from companies.models import Company
 
 
 class CompanyViewSet(ModelViewSet):
