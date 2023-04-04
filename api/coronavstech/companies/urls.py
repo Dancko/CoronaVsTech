@@ -8,5 +8,5 @@ router.register("companies", viewset=CompanyViewSet, basename="companies")
 
 urlpatterns = [
     path("", include(router.urls)),
-    path('send-email/', send_email, name='send_email'),
+    path("send-email/", send_email, name="send_email"),
 ]
