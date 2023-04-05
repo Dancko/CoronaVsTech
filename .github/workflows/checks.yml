@@ -20,3 +20,4 @@ jobs:
           export PYTHONPATH=${{ vars.PYTHONPATH }}
           export DJANGO_SETTINGS_MODULE=${{ vars.DJANGO_SETTINGS_MODULE }}
           pytest -v -s
+          pytest -v -s --rootdir= /home/runner/work/testing/testing/fibonacci
