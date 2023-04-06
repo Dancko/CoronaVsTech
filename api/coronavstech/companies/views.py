@@ -31,21 +31,20 @@ def send_email(request: Request) -> Response:
     )
 
 
-@api_view(http_method_names=['GET'])
+@api_view(http_method_names=["GET"])
 def fibonacci(request: Request) -> Response:
-    n = request.GET.get('n')
+    n = request.GET.get("n")
 
     if n:
         try:
             n = int(n)
             if n >= 0:
                 fi = dynamic_fib_v2(int(n))
-                return Response(
-                    {f"The {str(n)}th fibonacci number": str(fi)}
-                )
+                return Response({f"The {str(n)}th fibonacci number": str(fi)})
+            else:
+                raise ValueError
 
         except ValueError:
             return Response({"Error": f"{n} is incorrect data."}, status=400)
-
 
     return Response({"Error": "No data has been provided."}, status=400)
