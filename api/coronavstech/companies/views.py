@@ -37,11 +37,15 @@ def fibonacci(request: Request) -> Response:
 
     if n:
         try:
-            fi = dynamic_fib_v2(int(n))
+            n = int(n)
+            if n >= 0:
+                fi = dynamic_fib_v2(int(n))
+                return Response(
+                    {f"The {str(n)}th fibonacci number": str(fi)}
+                )
+
         except ValueError:
             return Response({"Error": f"{n} is incorrect data."}, status=400)
 
-        return Response(
-            {f"The {str(n)}th fibonacci number": str(fi)}
-        )
+
     return Response({"Error": "No data has been provided."}, status=400)
