@@ -1,6 +1,5 @@
 import pytest
-from time import sleep
-from dynamic import dynamic_fib_v2
+from api.coronavstech.companies.dynamic import dynamic_fib_v2
 from conftest import performance_tracker
 
 

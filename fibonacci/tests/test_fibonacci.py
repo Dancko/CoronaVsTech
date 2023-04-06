@@ -2,8 +2,7 @@ from typing import Callable
 
 from fibonacci.naive import fibonacci
 from fibonacci.cached import cached_fibs, lru_cached_fibs
-from dynamic import dynamic_fib, dynamic_fib_v2
-from conftest import time_tracker
+from api.coronavstech.companies.dynamic import dynamic_fib, dynamic_fib_v2
 import pytest
 
 
