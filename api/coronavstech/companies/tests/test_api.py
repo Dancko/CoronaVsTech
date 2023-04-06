@@ -19,9 +19,13 @@ def test_zero_companies_should_return_empty_list(client) -> None:
     assert res.data == []
 
 
-def test_one_company_exists_should_succeed(client) -> None:
+@pytest.fixture
+def amazon() -> Company:
+    return Company.objects.create(name="Amazon")
+
+
+def test_one_company_exists_should_succeed(client, amazon) -> None:
     """Test returning one company if it exists in db."""
-    amazon = Company.objects.create(name="Amazon")
     res = client.get(company_list_url)
 
     assert res.status_code == 200
@@ -121,3 +125,25 @@ def test_logged_info_level(caplog) -> None:
     with caplog.at_level(logging.INFO):
         logger.info("I'm logging info level.")
     assert "I'm logging info level." in caplog.text
+
+
+@pytest.fixture
+def company(**kwargs):
+    def _company_factory(**kwargs) -> Company:
+        company_name = kwargs.pop("name", "Test Company INC")
+        return Company.objects.create(name=company_name, **kwargs)
+
+    return _company_factory
+
+
+def test_multiple_companies_should_succeed(client, company) -> None:
+    tiktok = company(name="TikTok")
+    twitch = company(name="Twitch")
+    test_company = company()
+    company_names = {tiktok.name, twitch.name, test_company.name}
+
+    res = client.get(company_list_url).json()
+
+    assert len(res) == len(company_names)
+    response_company_names = set(map(lambda company: company.get("name"), res))
+    assert company_names == response_company_names
