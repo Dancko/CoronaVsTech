@@ -8,9 +8,9 @@ pytest = "*"
 djangorestframework = "*"
 black = "*"
 pytest-django = "*"
+pytest-xdist = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.10.10"
-
