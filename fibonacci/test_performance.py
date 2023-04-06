@@ -8,4 +8,3 @@ from conftest import performance_tracker
 @performance_tracker
 def test_performance():
     dynamic_fib_v2(1000)
-    sleep(3)
