@@ -3,7 +3,7 @@ from typing import Callable
 from fibonacci.naive import fibonacci
 from fibonacci.cached import cached_fibs, lru_cached_fibs
 from dynamic import dynamic_fib, dynamic_fib_v2
-from fixtures import time_tracker
+from conftest import time_tracker
 import pytest
 
 
@@ -12,6 +12,7 @@ import pytest
 #     res = fibonacci(n)
 #
 #     assert res == expected
+
 
 @pytest.mark.parametrize("n, expected", [(40, 102334155)])
 @pytest.mark.parametrize("fib_func", [fibonacci, cached_fibs, lru_cached_fibs, dynamic_fib, dynamic_fib_v2])
