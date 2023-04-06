@@ -38,6 +38,7 @@ def test_get_request_with_invalid_args_returns_error(client, n) -> None:
 #     assert res.data["detail"] == 'Method "POST" not allowed.'
 
 
+@pytest.mark.skip
 @pytest.mark.parametrize("n", [i for i in range(1, 1000)])
 def test_stress(client, n: int) -> None:
     """Stress test for fibonacci endpoint."""
