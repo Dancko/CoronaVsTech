@@ -1,5 +1,6 @@
 import pytest
 import logging
+from typing import List
 from django.shortcuts import reverse
 from rest_framework import status
 
@@ -17,11 +18,6 @@ def test_zero_companies_should_return_empty_list(client) -> None:
 
     assert res.status_code == 200
     assert res.data == []
-
-
-@pytest.fixture
-def amazon() -> Company:
-    return Company.objects.create(name="Amazon")
 
 
 def test_one_company_exists_should_succeed(client, amazon) -> None:
@@ -127,20 +123,14 @@ def test_logged_info_level(caplog) -> None:
     assert "I'm logging info level." in caplog.text
 
 
-@pytest.fixture
-def company(**kwargs):
-    def _company_factory(**kwargs) -> Company:
-        company_name = kwargs.pop("name", "Test Company INC")
-        return Company.objects.create(name=company_name, **kwargs)
-
-    return _company_factory
-
-
-def test_multiple_companies_should_succeed(client, company) -> None:
-    tiktok = company(name="TikTok")
-    twitch = company(name="Twitch")
-    test_company = company()
-    company_names = {tiktok.name, twitch.name, test_company.name}
+@pytest.mark.parametrize(
+    "companies",
+    [["TikTok", "Twitter", ""], ["Instagram", "Meta"]],
+    ids=["3 T Companies", "Zuckerberg's companies"],
+    indirect=True,
+)
+def test_multiple_companies_should_succeed(client, companies) -> None:
+    company_names = set(map(lambda x: x.name, companies))
 
     res = client.get(company_list_url).json()
 

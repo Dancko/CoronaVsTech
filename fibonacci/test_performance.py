@@ -1,6 +1,6 @@
 import pytest
 from api.coronavstech.companies.dynamic import dynamic_fib_v2
-from conftest import performance_tracker
+from fibonacci.conftest import performance_tracker
 
 
 @pytest.mark.performance
