@@ -21,7 +21,7 @@ jobs:
           pipenv install --system
           export PYTHONPATH=${{ vars.PYTHONPATH }}
           export DJANGO_SETTINGS_MODULE=${{ vars.DJANGO_SETTINGS_MODULE }}
-          pytest -v -s
+          pytest -v -s -m "not skip_ci" 
 
   fib_tests:
     runs-on: ubuntu-latest
